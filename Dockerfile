@@ -9,7 +9,7 @@ WORKDIR /app
 
 # Copy Maven wrapper and pom.xml first for dependency caching
 COPY .mvn .mvn
-COPY mvnw mvnw.cmd
+COPY mvnw .
 COPY pom.xml .
 
 # Download dependencies in a separate layer
@@ -37,19 +37,19 @@ COPY --from=builder /app/app.jar app.jar
 RUN chown appuser:appgroup app.jar
 USER appuser:appgroup
 
-# Expose the application port
+# Local default. On Render the app listens on the PORT variable it injects.
 EXPOSE 8080
 
-# JVM optimizations for container environments
+# JVM options for container environments
 ENV JAVA_OPTS="-XX:+UseContainerSupport \
 -XX:MaxRAMPercentage=70.0 \
 -XX:InitialRAMPercentage=50.0 \
 -XX:+UseG1GC \
 -XX:+ExitOnOutOfMemoryError"
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \
-    CMD ["sh", "-c", "exec java ${JAVA_OPTS} -jar app.jar"] || exit 1
+# Health check (Render ignores this and uses its own Health Check Path)
+HEALTHCHECK --interval=30s --timeout=3s --start-period=90s --retries=3 \
+    CMD wget -qO- http://localhost:${PORT:-8080}/actuator/health || exit 1
 
 # Run the application
 ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTS} -jar app.jar"]
