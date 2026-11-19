@@ -1,0 +1,34 @@
+# Build artifacts
+target/
+*.jar
+*.war
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Documentation
+*.md
+README*
+LICENSE*
+
+# Test source
+**/test/**
+!src/test/resources/db/migration/**
+
+# OS files
+.DS_Store
+Thumbs.db

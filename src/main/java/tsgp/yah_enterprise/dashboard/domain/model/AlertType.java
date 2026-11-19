@@ -1,0 +1,13 @@
+package tsgp.yah_enterprise.dashboard.domain.model;
+
+public enum AlertType {
+    OUT_OF_STOCK,
+    LOW_STOCK,
+    ORDER_AWAITING_VALIDATION,
+    CREDIT_REQUEST_PENDING,
+    STOCK_ADJUSTMENT_PENDING,
+    TRANSFER_NOT_RECEIVED,
+    TRANSFER_DISCREPANCY,
+    PURCHASE_NOT_DELIVERED,
+    PURCHASE_DISCREPANCY
+}
