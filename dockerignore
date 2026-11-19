@@ -1,9 +1,30 @@
+# Build artifacts
 target/
+*.jar
+*.war
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Git
 .git/
 .gitignore
-.idea/
-*.iml
-.vscode/
-.env
-*.log
-README.md
+.gitattributes
+
+# NOTE: .mvn/ and mvnw must NOT be ignored, the Dockerfile copies them.
+
+# Documentation
+*.md
+README*
+LICENSE*
+
+# Test source
+**/test/**
+!src/test/resources/db/migration/**
+
+# OS files
+.DS_Store
